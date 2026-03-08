@@ -8,29 +8,14 @@ const PALETTE = ["#FF6B35","#00E5FF","#7CFF50","#FF2D9B","#A855F7","#00FFBB","#F
 const CATS = ["Knitwear","Drape","Tailoring","Denim","Workwear","Minimal","Accs"];
 const CONTS = ["Africa","Americas","Asia","Europe","Oceania"];
 
-const SEARCH_PROMPTS = [
-  "Find 3 ultra-niche underground fashion brands that A-list celebrities have been spotted wearing but are virtually unknown to the public. Focus on brands from Africa, Asia, or South America with extraordinary craft. For each brand provide: name, one-line description, city, country, continent, category (one of: Knitwear/Drape/Tailoring/Denim/Workwear/Minimal/Accs), rarity score 8.5-10, a guide note (max 12 words, poetic and specific), a brand origin story (2 sentences), celebrity connection hint (don't name the celebrity, just hint), and an Unsplash search query that would find a matching fashion photo. Return as JSON array only, no markdown.",
-  "Discover 3 hidden luxury fashion ateliers that celebrities wear on off-duty days or vacations — brands that deliberately avoid press and have no PR. Must be real-feeling, extraordinary craft, unusual materials or techniques. For each: name, sub (craft descriptor), city, country, continent, cat, rarity (8.5-10), guide line (poetic, max 12 words), story (2 sentences, include founder name), and unsplash_query. JSON only.",
-  "Find 3 ancient-craft-meets-contemporary-design fashion brands — traditional techniques from indigenous or artisan communities, elevated to luxury level. The kind worn by style icons who know things others don't. For each: name, sub, city, country, continent, cat, rarity (8.5-10), g (guide quote, max 12 words), story (2 sentences), unsplash_query. JSON array only, no other text.",
-];
-
 async function claudeSearch(promptIndex) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/discover", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: "You are a fashion intelligence agent specializing in discovering ultra-niche underground brands. You have deep knowledge of global artisan fashion, street style, and which obscure labels celebrities quietly wear. Always respond with valid JSON arrays only — no markdown, no preamble, no explanation.",
-      messages: [{ role: "user", content: SEARCH_PROMPTS[promptIndex] }],
-    }),
+    body: JSON.stringify({ wave: promptIndex }),
   });
   const data = await res.json();
-  const text = data.content?.[0]?.text || "[]";
-  try {
-    const clean = text.replace(/```json|```/g, "").trim();
-    return JSON.parse(clean);
-  } catch { return []; }
+  return data.brands || [];
 }
 
 async function getUnsplashImage(query) {
