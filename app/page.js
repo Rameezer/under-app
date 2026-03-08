@@ -1,9 +1,10 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from "react";
 
+const SUPABASE_URL = "https://geqqyxrmdxwwyyddxohc.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlcXF5eHJtZHh3d3l5ZGR4b2hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTU0NzcsImV4cCI6MjA4ODU3MTQ3N30.0E3K0sfEAicGq4cKBqk_N2TdIrLs10pNgrGe_KC-z6Y";
 
-
-const DB = [
+const FALLBACK_DB = [
   {id:1,  name:"VESSEL",        sub:"Hand-Dyed Knitwear",        city:"New Orleans", ctry:"US", cont:"Americas", cat:"Knitwear",  r:9.2, color:"#FF6B35", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=90", g:"Every piece bathed in indigo 72 hours. You can smell the craft.", story:"Maya Chen started VESSEL in her grandmother's kitchen using indigo recipes from coastal Louisiana. A 72-hour ritual, never repeated."},
   {id:2,  name:"RUST & CLOTH",  sub:"Reclaimed Workwear",        city:"Detroit",     ctry:"US", cont:"Americas", cat:"Workwear",  r:8.7, color:"#00E5FF", img:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=90", g:"Dead-stock from a factory closed in '87. Literal history on your back.", story:"James Okafor tracked down dead-stock denim from his father's closed Ford plant. Every serial number tells a story."},
   {id:3,  name:"GROVE",         sub:"Earth-Pigment Textiles",    city:"Oaxaca",      ctry:"MX", cont:"Americas", cat:"Knitwear",  r:9.6, color:"#7CFF50", img:"https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=800&q=90", g:"Cochineal beetle pigment. Ancient dye. Wild silhouette.", story:"Sofía Ruiz grinds cochineal beetles for pigment just as her great-aunt did. GROVE refuses to simplify that knowledge for anyone."},
@@ -64,6 +65,22 @@ const WHISPERS = [
 const PAGE = 14;
 const shuffle = a => [...a].sort(() => Math.random() - 0.5);
 
+async function fetchBrands() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/brands?select=*&order=r.desc`, {
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+      }
+    });
+    if (!res.ok) throw new Error("fetch failed");
+    const data = await res.json();
+    return data.length > 0 ? shuffle(data) : shuffle(FALLBACK_DB);
+  } catch {
+    return shuffle(FALLBACK_DB);
+  }
+}
+
 export default function App() {
   const [tab, setTab]         = useState("feed");
   const [cat, setCat]         = useState("All");
@@ -72,6 +89,8 @@ export default function App() {
   const [saved, setSaved]     = useState({});
   const [page, setPage]       = useState(1);
   const [paging, setPaging]   = useState(false);
+  const [db, setDb]           = useState(() => shuffle(FALLBACK_DB));
+  const [dbLoading, setDbLoading] = useState(true);
   const [active, setActive]   = useState(null);
   const [guideOpen, setGuideOpen] = useState(false);
   const [guideQ, setGuideQ]   = useState("");
@@ -79,7 +98,7 @@ export default function App() {
   const [guideL, setGuideL]   = useState(false);
   const [whisper, setWhisper] = useState(0);
   const [splash, setSplash]   = useState(true);
-  const [feed]                = useState(() => shuffle(DB));
+  
   const [showFilters, setShowFilters] = useState(false);
   const [heroIdx, setHeroIdx] = useState(0);
   const loaderRef             = useRef(null);
@@ -91,7 +110,14 @@ export default function App() {
     return () => { clearTimeout(t1); clearInterval(t2); clearInterval(t3); };
   }, []);
 
-  const filtered = feed.filter(b =>
+  useEffect(() => {
+    fetchBrands().then(data => {
+      setDb(data);
+      setDbLoading(false);
+    });
+  }, []);
+
+  const filtered = db.filter(b =>
     (cat  === "All" || b.cat  === cat)  &&
     (cont === "All" || b.cont === cont) &&
     (!search || [b.name,b.city,b.sub,b.ctry].some(s => s.toLowerCase().includes(search.toLowerCase())))
@@ -114,7 +140,7 @@ export default function App() {
   }, [onIntersect]);
 
   const toggle = (id, e) => { e?.stopPropagation(); setSaved(p => ({...p,[id]:!p[id]})); };
-  const savedList = DB.filter(b => saved[b.id]);
+  const savedList = db.filter(b => saved[b.id]);
 
   // ── Guide — calls our secure Next.js API route, not Anthropic directly
   const askGuide = async () => {
@@ -331,7 +357,7 @@ export default function App() {
           <div className="sp-logo">ÜNDER</div>
           <div style={{width:"32px",height:"2px",background:"rgba(255,255,255,.15)",margin:"12px auto",animation:"splashSub .5s .7s ease both",opacity:0}} />
           <div className="sp-sub">Underground Fashion</div>
-          <div className="sp-count">{DB.length} brands · {[...new Set(DB.map(b=>b.ctry))].length} countries</div>
+          <div className="sp-count">{db.length} brands · {[...new Set(db.map(b=>b.ctry))].length} countries</div>
         </div>
 
         {/* HEADER */}
@@ -356,7 +382,7 @@ export default function App() {
             </div>
           </div>
           <div className="stats-bar">
-            {[["Brands",filtered.length],["Countries",[...new Set(DB.map(b=>b.ctry))].length],["Continents",[...new Set(DB.map(b=>b.cont))].length],["Saved",savedList.length]].map(([l,n],i)=>(
+            {[["Brands",filtered.length],["Countries",[...new Set(db.map(b=>b.ctry))].length],["Continents",[...new Set(db.map(b=>b.cont))].length],["Saved",savedList.length]].map(([l,n],i)=>(
               <div key={l} className="stat" style={{animationDelay:`${i*.07}s`}}>
                 <div className="stat-n">{n}</div>
                 <div className="stat-l">{l}</div>
@@ -369,7 +395,7 @@ export default function App() {
           {(tab==="feed"||tab==="search") && (<>
             <div className="ticker">
               <div className="ticker-inner">
-                {[...DB,...DB].map((b,i)=>(
+                {[...db,...db].map((b,i)=>(
                   <span key={i} className="tick">
                     <span className="tick-dot" style={{background:b.color}} />
                     <em>{b.name}</em>
