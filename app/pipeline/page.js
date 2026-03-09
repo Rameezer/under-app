@@ -5,7 +5,8 @@ const SUPABASE_URL = "https://geqqyxrmdxwwyyddxohc.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlcXF5eHJtZHh3d3l5ZGR4b2hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTU0NzcsImV4cCI6MjA4ODU3MTQ3N30.0E3K0sfEAicGq4cKBqk_N2TdIrLs10pNgrGe_KC-z6Y";
 
 const PALETTE = ["#FF6B35","#00E5FF","#7CFF50","#FF2D9B","#A855F7","#00FFBB","#FFD700"];
-const CATS = ["Knitwear","Drape","Tailoring","Denim","Workwear","Minimal","Accs"];
+const CATS = ["Knitwear","Drape","Tailoring","Denim","Workwear","Minimal","Accs","Painting","Ceramic","Photo","Textile Art"];
+const ART_CATS = ["Painting","Ceramic","Photo","Textile Art"];
 const CONTS = ["Africa","Americas","Asia","Europe","Oceania"];
 
 const UNSPLASH_POOLS = {
@@ -223,8 +224,8 @@ export default function Pipeline() {
     setLog([]);
     addLog("Initializing brand discovery engine...", "system");
     const allFinds = [];
-    for (let i = 0; i < 3; i++) {
-      addLog(`Search wave ${i + 1}/3 — querying fashion intelligence...`, "info");
+    for (let i = 0; i < 4; i++) {
+      addLog(`Search wave ${i + 1}/4 — ${i < 3 ? 'fashion intelligence' : 'art & artist discovery'}...`, "info");
       await new Promise(r => setTimeout(r, 400));
       try {
         const results = await runDiscoveryWave(i);
@@ -487,7 +488,7 @@ export default function Pipeline() {
               <div className="idle-h">Discovery Engine</div>
               <div className="idle-p">Claude scans the global fashion underground, qualifies each find, and lets you edit everything before publishing live.</div>
               <div className="idle-steps">
-                {[["01","Claude runs 3 search waves for hidden brands"],["02","Each brand scored on craft, rarity & celebrity adjacency"],["03","Edit name, story, image, color before publishing"],["04","One click publishes live + generates Instagram content"]].map(([n,t]) => (
+                {[["01","Claude runs 4 waves — 3 fashion, 1 art & artist discovery"],["02","Each brand scored on craft, rarity & celebrity adjacency"],["03","Edit name, story, image, color before publishing"],["04","One click publishes live + generates Instagram content"]].map(([n,t]) => (
                   <div key={n} className="is"><div className="is-n">{n}</div><div className="is-t">{t}</div></div>
                 ))}
               </div>
