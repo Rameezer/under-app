@@ -49,10 +49,21 @@ const FALLBACK_DB = [
   {id:42, name:"BRUTA",         sub:"Brutalist Knitwear",        city:"Lisbon",      ctry:"PT", cont:"Europe",   cat:"Knitwear", r:8.9, color:"#FFD700", img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=90", g:"Lisbon's concrete brutalism in knitwear form. Real weight. Structural presence.", story:"Ana Costa knits to evoke the weight of Lisbon's brutalist buildings. These garments make their presence physically felt."},
   {id:43, name:"BANDHANI",      sub:"Tie-Dye Mastery",           city:"Kutch",       ctry:"IN", cont:"Asia",     cat:"Drape",    r:9.2, color:"#FF6B35", img:"https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?w=800&q=90", g:"5,000 tiny knots per piece. One family, three generations.", story:"The Khatri family of Kutch has practiced Bandhani tie-dye for three generations. Global debut now."},
   {id:44, name:"HOLLOW",        sub:"Zero-Waste Streetwear",     city:"Portland",    ctry:"US", cont:"Americas", cat:"Workwear", r:8.1, color:"#00E5FF", img:"https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&q=90", g:"Every offcut becomes something. Their studio floor is genuinely spotless.", story:"Three RISD graduates committed to zero waste. Every scrap becomes the next piece."},
+  {id:46, name:"OCHRE STUDIO",    sub:"Earth Pigment Painting",     city:"Oaxaca",      ctry:"MX", cont:"Americas", cat:"Painting",      r:9.6, color:"#FF6B35", img:"https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=90", g:"Volcano ash and clay. Colour you cannot buy in a tube.", story:"Elena Vasquez grinds volcanic minerals from Oaxacan highlands to create pigments unavailable anywhere else. Beyonce has three pieces. None are for sale."},
+  {id:47, name:"CLAY MONK",        sub:"Ceremonial Ceramics",          city:"Kyoto",       ctry:"JP", cont:"Asia",     cat:"Ceramic",       r:9.8, color:"#00FFBB", img:"https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=90", g:"Three kiln firings. Each one a conversation with chance.", story:"Takeshi Yamamoto has been throwing clay in the same Kyoto studio for 31 years. His pieces take two years to acquire. The waiting list is the point."},
+  {id:48, name:"VELUM",            sub:"Darkroom Silver Gelatin",      city:"Lagos",       ctry:"NG", cont:"Africa",   cat:"Photo",         r:9.4, color:"#A855F7", img:"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&q=90", g:"Silver halide. Lagos light. Nothing digital has ever looked like this.", story:"Amara Osei shoots exclusively on large-format film in Lagos, printing in her own darkroom. Collectors say her photographs smell like the city they capture."},
+  {id:49, name:"NOOR LOOM",        sub:"Hand-Knotted Textile Art",     city:"Fez",         ctry:"MA", cont:"Africa",   cat:"Textile Art",   r:9.5, color:"#FFD700", img:"https://images.unsplash.com/photo-1558171813-c36a2d4a9dcd?w=800&q=90", g:"Six months per piece. Some collectors wait three years.", story:"Fatima Benali and her four sisters have knotted wool tapestries in their family riad for two generations. The patterns are a private language only they can read."},
+  {id:50, name:"ASH   {id:45, name:"CERRADO", IRON",       sub:"Abstract Fire Painting",       city:"Detroit",     ctry:"US", cont:"Americas", cat:"Painting",      r:9.1, color:"#00E5FF", img:"https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=90", g:"Motor city iron oxide and fire as medium. Industry as beauty.", story:"Marcus Webb burns automotive steel and captures the patina on canvas. His Detroit series has been quietly acquired by three major musicians who refuse to identify themselves."},
+  {id:51, name:"SEOKSU",           sub:"Korean Celadon Revival",       city:"Seoul",       ctry:"KR", cont:"Asia",     cat:"Ceramic",       r:9.7, color:"#7CFF50", img:"https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=90", g:"Goryeo dynasty glaze. Twelve centuries of memory in the clay.", story:"Park Soohyun studied celadon archives for a decade before producing a single piece. The jade-green glaze has not been replicated since the 12th century until now."},
+  {id:52, name:"BAST WORKS",       sub:"Bark Fibre Textile Art",       city:"Kampala",     ctry:"UG", cont:"Africa",   cat:"Textile Art",   r:9.6, color:"#FF2D9B", img:"https://images.unsplash.com/photo-1558171813-c36a2d4a9dcd?w=800&q=90", g:"Fig tree bark beaten into wall art. UNESCO craft as contemporary gallery piece.", story:"Ssali Mutebi transforms UNESCO-recognised Ugandan barkcloth into large-scale textile installations. Six international galleries hold pieces. None are labelled."},
+  {id:53, name:"SILT PRESS",       sub:"River Sediment Photography",   city:"New Orleans", ctry:"US", cont:"Americas", cat:"Photo",         r:9.2, color:"#00FFBB", img:"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&q=90", g:"Mississippi mud as developer. The river writes its own portrait.", story:"Josephine Tran uses Mississippi River sediment as a photographic developer, producing prints with a warmth no chemical process has matched. She makes 40 prints a year."},
+  {id:54, name:"MERIDIAN INK",     sub:"Natural Pigment Abstraction",  city:"Jaipur",      ctry:"IN", cont:"Asia",     cat:"Painting",      r:9.3, color:"#FF6B35", img:"https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=90", g:"Pomegranate rind and indigo. Colours that come from the ground not a factory.", story:"Priya Nair grinds Rajasthani minerals and botanical matter into paint by hand, refusing synthetic pigment entirely. Her canvases cannot be reproduced. That is the whole point."},
+  {id:55, name:"KUMO",             sub:"Paper Sculpture Art",          city:"Tokyo",       ctry:"JP", cont:"Asia",     cat:"Textile Art",   r:9.9, color:"#FFD700", img:"https://images.unsplash.com/photo-1558171813-c36a2d4a9dcd?w=800&q=90", g:"Washi paper folded into architecture. Each piece takes a month.", story:"Haruki Ono creates large-scale washi paper sculptures that function as both wall art and wearable objects. His work sits in the collection of three fashion houses and one emperor."},
   {id:45, name:"CERRADO",       sub:"Brazilian Cerrado Dye",     city:"São Paulo",   ctry:"BR", cont:"Americas", cat:"Drape",    r:9.0, color:"#7CFF50", img:"https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=90", g:"Dyed with endangered savanna plants. The biome is in the colour.", story:"CERRADO uses plants from Brazil's endangered Cerrado savanna. Conservation through couture."},
 ];
 
-const CATS    = ["All","Knitwear","Drape","Tailoring","Denim","Workwear","Minimal","Accs"];
+const CATS    = ["All","Knitwear","Drape","Tailoring","Denim","Workwear","Minimal","Accs","Painting","Ceramic","Photo","Textile Art"];
+const ART_CATS = ["Painting","Ceramic","Photo","Textile Art"];
 const CONTS   = ["All","Africa","Americas","Asia","Europe","Oceania"];
 const PALETTE = ["#FF6B35","#00E5FF","#7CFF50","#FF2D9B","#A855F7","#00FFBB","#FFD700"];
 const WHISPERS = [
@@ -61,9 +72,13 @@ const WHISPERS = [
   "These aren't brands — they're arguments.",
   "Touch the fabric. If it says something, buy it.",
   "You came for an outfit. You'll leave with a perspective.",
+  "The painting on their wall tells you more than the jacket on their back.",
+  "Art and fashion have always spoken the same language. We translate.",
+  "The rarest finds are the ones that exist in only one home on earth.",
 ];
 const PAGE = 14;
 const shuffle = a => [...a].sort(() => Math.random() - 0.5);
+const isArt = b => ART_CATS.includes(b?.cat);
 
 async function fetchBrands() {
   try {
@@ -286,6 +301,13 @@ export default function App() {
         .pin-heart.on{animation:heartPop .4s ease;color:var(--c4);background:rgba(255,45,155,.2);border-color:rgba(255,45,155,.3);}
         .pin-rar{position:absolute;top:8px;left:8px;z-index:3;font-family:'DM Mono',monospace;font-size:8px;padding:3px 8px;border-radius:2px;color:#000;font-weight:700;opacity:0;transform:translateY(-4px);transition:all .25s;}
         .pin:hover .pin-rar{opacity:1;transform:none;}
+        .pin.art{border-radius:2px;}
+        .pin.art .pin-info{background:linear-gradient(transparent,rgba(5,5,5,.96) 100%);}
+        .pin.art .pin-name{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;letter-spacing:1px;}
+        .pin.art .pin-loc{color:rgba(255,255,255,.25);font-size:6px;letter-spacing:2px;}
+        .pin-medium{position:absolute;top:8px;left:8px;z-index:3;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:2px;color:#000;font-weight:700;opacity:0;transform:translateY(-4px);transition:all .25s;}
+        .pin:hover .pin-medium{opacity:1;transform:none;}
+        .art-frame{position:absolute;inset:6px;border:1px solid rgba(255,255,255,.08);pointer-events:none;z-index:2;border-radius:2px;}
         .loader{height:20px;}
         .loading{display:flex;justify-content:center;gap:6px;padding:16px;}
         .ldot{width:8px;height:8px;border-radius:50%;animation:dotBounce 1.2s ease infinite;}
@@ -356,7 +378,7 @@ export default function App() {
           <div className="sp-scanline" />
           <div className="sp-logo">ÜNDER</div>
           <div style={{width:"32px",height:"2px",background:"rgba(255,255,255,.15)",margin:"12px auto",animation:"splashSub .5s .7s ease both",opacity:0}} />
-          <div className="sp-sub">Underground Fashion</div>
+          <div className="sp-sub">Underground Fashion &amp; Art</div>
           <div className="sp-count">{db.length} brands · {[...new Set(db.map(b=>b.ctry))].length} countries</div>
         </div>
 
@@ -377,12 +399,18 @@ export default function App() {
           </div>
           <div className={`filter-wrap${showFilters?" open":""}`}>
             <div className="filter-inner">
+              <div className="filter-row" style={{marginBottom:5}}>
+                {[["All","All"],["Fashion","fashion"],["Art","art"]].map(([lbl,val])=>(
+                  <button key={val} className={`fp${(val==="all"||(val==="fashion"&&!ART_CATS.includes(cat)&&cat!=="All")||(val==="art"&&ART_CATS.includes(cat)))?" on":""}`}
+                    onClick={()=>{if(val==="fashion"){setCat("Knitwear")}else if(val==="art"){setCat("Painting")}else{setCat("All")}}}>{lbl}</button>
+                ))}
+              </div>
               <div className="filter-row">{CATS.map(c=><button key={c} className={`fp${cat===c?" on":""}`} onClick={()=>setCat(c)}>{c}</button>)}</div>
               <div className="filter-row" style={{marginTop:5}}>{CONTS.map(c=><button key={c} className={`fp${cont===c?" on":""}`} onClick={()=>setCont(c)}>{c}</button>)}</div>
             </div>
           </div>
           <div className="stats-bar">
-            {[["Brands",filtered.length],["Countries",[...new Set(db.map(b=>b.ctry))].length],["Continents",[...new Set(db.map(b=>b.cont))].length],["Saved",savedList.length]].map(([l,n],i)=>(
+            {[["Finds",filtered.length],["Countries",[...new Set(db.map(b=>b.ctry))].length],["Continents",[...new Set(db.map(b=>b.cont))].length],["Saved",savedList.length]].map(([l,n],i)=>(
               <div key={l} className="stat" style={{animationDelay:`${i*.07}s`}}>
                 <div className="stat-n">{n}</div>
                 <div className="stat-l">{l}</div>
@@ -436,7 +464,7 @@ export default function App() {
                   ))}
                 </div>
                 <div className="hero-content">
-                  <div className="hero-eyebrow"><span style={{color:cur?.color}}>Today's Find</span></div>
+                  <div className="hero-eyebrow"><span style={{color:cur?.color}}>{isArt(cur) ? "Art Find" : "Today's Find"}</span></div>
                   <div className="hero-name">{cur?.name}</div>
                   <div className="hero-sub">{cur?.sub} · {cur?.city}</div>
                   <div className="hero-guide" style={{borderLeftColor:cur?.color,color:cur?.color}}>"{cur?.g}"</div>
@@ -453,7 +481,7 @@ export default function App() {
 
               <div className="sec-label">
                 <div className="sl-line"/><span className="sl-dot">◆</span>
-                <span className="sl-txt">{cat!=="All"||cont!=="All"?[cat!=="All"&&cat,cont!=="All"&&cont].filter(Boolean).join(" · "):"All Brands"}</span>
+                <span className="sl-txt">{cat!=="All"||cont!=="All"?[cat!=="All"&&cat,cont!=="All"&&cont].filter(Boolean).join(" · "):"All Finds"}</span>
                 <span className="sl-dot">◆</span><div className="sl-line"/>
               </div>
 
@@ -461,13 +489,14 @@ export default function App() {
                 {[col0,col1].map((col,ci)=>(
                   <div key={ci} className="m-col">
                     {col.map((b,ri)=>(
-                      <div key={b.id} className="pin" style={{height:h(b.id,ci),animationDelay:`${(ri*2+ci)*.04}s`}} onClick={()=>setActive(b)}>
+                      <div key={b.id} className={`pin${isArt(b)?" art":""}`} style={{height:h(b.id,ci),animationDelay:`${(ri*2+ci)*.04}s`}} onClick={()=>setActive(b)}>
                         <img src={b.img} alt={b.name} loading="lazy" />
                         <div className="pin-grad"/>
                         <div className="pin-topbar" style={{background:b.color}}/>
                         <div className="pin-rar" style={{background:b.color}}>{b.r}</div>
                         <button className={`pin-heart${saved[b.id]?" on":""}`} onClick={e=>toggle(b.id,e)}>{saved[b.id]?"♥":"♡"}</button>
-                        <div className="pin-cat" style={{background:b.color}}>{b.cat}</div>
+                        <div className={isArt(b) ? "pin-medium" : "pin-cat"} style={{background:b.color}}>{b.cat}</div>
+                        {isArt(b) && <div className="art-frame"/>}
                         <div className="pin-info">
                           <div className="pin-name">{b.name}</div>
                           <div className="pin-loc">{b.city} · {b.ctry}</div>
@@ -484,7 +513,7 @@ export default function App() {
                 <div className="end-msg">
                   <div className="end-logo">ÜNDER</div>
                   <div className="end-line"/>
-                  <div className="end-sub">{filtered.length} brands · more added weekly</div>
+                  <div className="end-sub">{filtered.length} finds · fashion &amp; art · more added weekly</div>
                 </div>
               )}
             </>)}
@@ -547,8 +576,8 @@ export default function App() {
                 <div className="sh-rar" style={{background:active.color}}>◆ {active.r} / 10</div>
                 <div className="sh-nameblock">
                   <div className="sh-name">{active.name}</div>
-                  <div className="sh-tag" style={{color:active.color}}>{active.sub}</div>
-                  <div className="sh-loc">{active.city} · {active.ctry}</div>
+                  <div className="sh-tag" style={{color:active.color}}>{isArt(active) ? `${active.sub}` : active.sub}</div>
+                  <div className="sh-loc">{isArt(active) ? `${active.cat} · ${active.city}` : `${active.city} · ${active.ctry}`}</div>
                 </div>
               </div>
               <div className="sh-body">
@@ -558,7 +587,7 @@ export default function App() {
                   <div className="sg-txt">"{active.g}"</div>
                 </div>
                 <div className="sh-actions">
-                  <button className="sh-btn fill" style={{background:active.color}}>Follow Brand</button>
+                  <button className="sh-btn fill" style={{background:active.color}}>{isArt(active) ? "Follow Artist" : "Follow Brand"}</button>
                   <button className={`sh-btn ghost${saved[active.id]?" on":""}`}
                     style={saved[active.id]?{background:active.color+"22",borderColor:active.color,color:active.color}:{}}
                     onClick={()=>toggle(active.id)}>
@@ -576,14 +605,14 @@ export default function App() {
             <div className="guide-sheet" onClick={e=>e.stopPropagation()}>
               <div className="gs-top"/>
               <div className="gs-title">Ask The Guide</div>
-              <div className="gs-sub">"I know every brand in the vault. Ask me anything."</div>
+              <div className="gs-sub">"I know every brand and artist in the vault. Ask me anything."</div>
               <div className="gs-chips">
-                {["Earthy & natural","Best from Africa","Tokyo underground","Natural dye only","Rarest finds","Nordic minimal","Architectural","Under $300"].map(c=>(
+                {["Earthy & natural","Best from Africa","Tokyo underground","Rarest finds","Nordic minimal","Rare paintings","Underground artists","Ceramic masters"].map(c=>(
                   <button key={c} className="gs-chip" onClick={()=>setGuideQ(c)}>{c}</button>
                 ))}
               </div>
               <div className="gs-row">
-                <input className="gs-in" autoFocus placeholder="Ask anything…" value={guideQ}
+                <input className="gs-in" autoFocus placeholder="Ask about fashion, art, artists…" value={guideQ}
                   onChange={e=>setGuideQ(e.target.value)} onKeyDown={e=>e.key==="Enter"&&askGuide()}/>
                 <button className="gs-go" style={{background:PALETTE[whisper%PALETTE.length]}} onClick={askGuide} disabled={guideL}>
                   {guideL?"…":"→"}
