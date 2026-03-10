@@ -313,19 +313,19 @@ export default function Studio() {
         .step-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--dim3);flex-shrink:0;}
 
         /* ── DROP ZONE */
-        .dropzone{border:1px dashed var(--rule2);border-radius:8px;transition:all .25s;cursor:pointer;position:relative;overflow:hidden;}
-        .dropzone.over{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.02);}
-        .dropzone.has-img{border-style:solid;border-color:var(--rule2);}
-        .dz-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:14px;text-align:center;}
-        .dz-icon{font-size:32px;opacity:.25;transition:all .25s;}
-        .dropzone.over .dz-icon{opacity:.6;transform:scale(1.1);}
-        .dz-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:5px;animation:colorShift 7s linear infinite;}
-        .dz-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--dim3);line-height:1.8;}
-        .dz-btn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:8px 22px;background:var(--bg4);border:1px solid var(--rule2);color:var(--dim3);cursor:pointer;border-radius:3px;transition:all .2s;}
-        .dz-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;}
-        .dz-preview{width:100%;height:280px;object-fit:cover;display:block;border-radius:6px;cursor:pointer;}
-        .dz-change{position:absolute;bottom:10px;right:10px;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;background:rgba(5,5,5,.8);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);cursor:pointer;border-radius:3px;backdrop-filter:blur(8px);transition:all .2s;}
-        .dz-change:hover{color:#fff;border-color:rgba(255,255,255,.4);}
+        .upload-zone{border-radius:8px;overflow:hidden;}
+        .upload-empty{border:1px dashed rgba(255,255,255,0.1);border-radius:8px;padding:36px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;transition:all .2s;}
+        .upload-empty.drag-over{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.02);}
+        .upload-icon{font-size:28px;opacity:.4;}
+        .upload-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:5px;animation:colorShift 7s linear infinite;}
+        .upload-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--dim3);line-height:1.8;}
+        .upload-pick-btn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:10px 26px;background:var(--bg4);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,.6);border-radius:4px;cursor:pointer;transition:all .2s;display:inline-block;margin-top:4px;}
+        .upload-pick-btn:hover{border-color:rgba(255,255,255,.35);color:#fff;background:var(--bg5);}
+        .upload-preview-wrap{position:relative;border-radius:8px;overflow:hidden;}
+        .upload-preview{width:100%;height:260px;object-fit:cover;display:block;}
+        .upload-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(0,0,0,.7));display:flex;justify-content:flex-end;}
+        .upload-change-btn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;background:rgba(5,5,5,.75);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:3px;cursor:pointer;backdrop-filter:blur(8px);transition:all .2s;display:inline-block;}
+        .upload-change-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
 
         /* ── INTEL BOX */
         .intel-wrap{position:relative;}
@@ -445,28 +445,43 @@ export default function Studio() {
 
           {/* STEP 1 — Image */}
           <div className="step"><div className="step-n">01</div><div className="step-line"/><div className="step-label">Photo</div></div>
-          <label
-            className={`dropzone${dragOver?" over":""}${imgPreview?" has-img":""}`}
-            onDragOver={e=>{e.preventDefault();setDragOver(true);}}
-            onDragLeave={()=>setDragOver(false)}
-            onDrop={onDrop}
-            style={{display:"block",cursor:"pointer"}}
-          >
-            <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>{if(e.target.files[0])handleImageFile(e.target.files[0]);}} />
+          {/* ── PHOTO UPLOAD ── */}
+          <div className="upload-zone">
             {imgPreview ? (
-              <>
-                <img src={imgPreview} alt="" className="dz-preview" />
-                <span className="dz-change">Change Photo</span>
-              </>
+              <div className="upload-preview-wrap">
+                <img src={imgPreview} alt="" className="upload-preview" />
+                <div className="upload-overlay">
+                  <input
+                    type="file"
+                    id="photo-upload"
+                    accept="image/*"
+                    style={{display:"none"}}
+                    onChange={e => { if (e.target.files && e.target.files[0]) handleImageFile(e.target.files[0]); }}
+                  />
+                  <label htmlFor="photo-upload" className="upload-change-btn">Change Photo</label>
+                </div>
+              </div>
             ) : (
-              <div className="dz-inner">
-                <div className="dz-icon">⬡</div>
-                <div className="dz-title">Drop Photo Here</div>
-                <div className="dz-sub">Or click to upload from laptop<br/>JPG · PNG · WEBP</div>
-                <span className="dz-btn">Browse Files</span>
+              <div
+                className={`upload-empty${dragOver ? " drag-over" : ""}`}
+                onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={e => { e.preventDefault(); setDragOver(false); if (e.dataTransfer.files[0]) handleImageFile(e.dataTransfer.files[0]); }}
+              >
+                <div className="upload-icon">📷</div>
+                <div className="upload-title">Add a Photo</div>
+                <div className="upload-sub">From your laptop, phone, or drag & drop</div>
+                <input
+                  type="file"
+                  id="photo-upload"
+                  accept="image/*"
+                  style={{display:"none"}}
+                  onChange={e => { if (e.target.files && e.target.files[0]) handleImageFile(e.target.files[0]); }}
+                />
+                <label htmlFor="photo-upload" className="upload-pick-btn">Browse Files</label>
               </div>
             )}
-          </label>
+          </div>
 
           {/* STEP 2 — Intel */}
           <div className="step"><div className="step-n">02</div><div className="step-line"/><div className="step-label">Your Intel</div></div>
