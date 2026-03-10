@@ -149,7 +149,6 @@ export default function Studio() {
   const [toast, setToast]           = useState("");
 
   const canvasRef   = useRef(null);
-  const fileInputRef= useRef(null);
   const intelRef    = useRef(null);
 
   const set = (k,v) => setBrand(b=>({...b,[k]:v}));
@@ -446,27 +445,28 @@ export default function Studio() {
 
           {/* STEP 1 — Image */}
           <div className="step"><div className="step-n">01</div><div className="step-line"/><div className="step-label">Photo</div></div>
-          <input ref={fileInputRef} type="file" accept="image/*" style={{display:"none"}} onChange={e=>handleImageFile(e.target.files[0])} />
-          <div className={`dropzone${dragOver?" over":""}${imgPreview?" has-img":""}`}
+          <label
+            className={`dropzone${dragOver?" over":""}${imgPreview?" has-img":""}`}
             onDragOver={e=>{e.preventDefault();setDragOver(true);}}
             onDragLeave={()=>setDragOver(false)}
             onDrop={onDrop}
-            onClick={!imgPreview?()=>fileInputRef.current?.click():undefined}
+            style={{display:"block",cursor:"pointer"}}
           >
+            <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>{if(e.target.files[0])handleImageFile(e.target.files[0]);}} />
             {imgPreview ? (
               <>
                 <img src={imgPreview} alt="" className="dz-preview" />
-                <button className="dz-change" onClick={e=>{e.stopPropagation();fileInputRef.current?.click();}}>Change Photo</button>
+                <span className="dz-change">Change Photo</span>
               </>
             ) : (
               <div className="dz-inner">
                 <div className="dz-icon">⬡</div>
                 <div className="dz-title">Drop Photo Here</div>
                 <div className="dz-sub">Or click to upload from laptop<br/>JPG · PNG · WEBP</div>
-                <button className="dz-btn" onClick={e=>{e.stopPropagation();fileInputRef.current?.click();}}>Browse Files</button>
+                <span className="dz-btn">Browse Files</span>
               </div>
             )}
-          </div>
+          </label>
 
           {/* STEP 2 — Intel */}
           <div className="step"><div className="step-n">02</div><div className="step-line"/><div className="step-label">Your Intel</div></div>
